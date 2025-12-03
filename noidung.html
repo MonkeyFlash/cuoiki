@@ -70,7 +70,7 @@
             <span>❤️Lượt thích: </span>
             <span>💬Bình luận: </span>
             <br>
-            <button class ="ct">Xem chi tiết</button>
+            <button class ="ct chitiet" >Xem chi tiết</button>
             <button class ="ct sua ">Sửa bài viết</button>
             <button class ="ct xoa">Xóa bài viết</button>
             <span class="trangthai">Đây là bài viết công khai/riêng tư</span>
@@ -85,12 +85,44 @@
             <span>❤️Lượt thích: </span>
             <span>💬Bình luận: </span>
             <br>
-            <button class ="ct">Xem chi tiết</button>
+            <button class ="ct chitiet" >Xem chi tiết</button>
             <button class ="ct sua ">Sửa bài viết</button>
             <button class ="ct xoa">Xóa bài viết</button>
             <span class="trangthai">Đây là bài viết công khai/riêng tư</span>
         </div>
         </div>
     </div>
+    <div class ="overlay">
+      <div class ="popup">
+        <span class="close-popup">X</span>
+        <div class ="popup-content">
+          <h2>Tiêu đề bài viết</h2>
+          <p>Ngày đăng: 2025- 01-05 vào lúc 00:00:00 AM</p>
+          <p>Chủ đề: Chủ đề 1</p>
+          <div class ="like">
+            <button class ="like-btn">❤️ Thích</button>
+            <span class ="like-count">0 Lượt thích</span>
+          </div>
+          <h3>Bình luận</h3>
+          <p>Chưa có bình luận</p>
+          <div class ="cmt">
+            <textarea placeholder ="Viết bình luận..." rows="4"></textarea>
+            <button class ="cmt-btn">Gửi bình luận</button>
+          </div>
+      </div>
+    </div>
 </body>
+<script>
+  let show = document.querySelectorAll(".chitiet");
+  let overlay = document.querySelector(".overlay");
+  let closePopup = document.querySelector(".close-popup");
+  show.forEach(btn => {
+  btn.addEventListener("click", function() {
+    overlay.classList.add("show");
+  });
+});
+  closePopup.addEventListener("click", function() {
+    overlay.classList.remove("show");
+  });
+</script>
 </html>

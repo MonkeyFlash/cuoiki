@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #f6f7fb;
+    padding: 20px 40px;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.header h2 {
+    font-size: 2.5em;
+    color: #473e3e;
+}
+.btn-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.btn-right button {
+    padding: 9px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+}
+.stats{
+    background-color:#cfb4b4;
+}
+.mode {
+    background: #473e3e;
+    color: white;
+}
+.logout {
+    background: red;
+    color: white;
+}
+.hello {
+    margin: 10px;
+    font-size: 30px;
+}
+.container {
+    margin-top: 150px;
+    display: flex;
+    gap: 30px;
+    justify-content: space-around;
+}
+.cards{
+    background: #fff;
+    border-radius: 18px;
+    min-width: 15%;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.cards h3{
+    font-size: 1.5em;
+    margin: 10px 0px;
+}
+.cards p{
+    margin: 10px 0px;
+    font-size: 1.2em;
+}
+.cards ul{
+    margin: 10px 10px;
+    font-size: 1.2em;
+}
+.cards ul li{
+    margin: 5px 0px;
+}
