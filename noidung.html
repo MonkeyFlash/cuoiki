@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+  <link rel="stylesheet" href="noidung.css">
+</head>
+<body>
+  <header class="header">
+    <h2>Trang quản lý tài khoản</h2>
+    <div class = "btn-right">
+      <button class ="stats">📊Xem thống kê</button>
+      <button class ="mode">🌘Chế độ tối</button>
+      <button class ="logout">🚪Đăng xuất</button>
+    </div>
+  </header>
+     <p class ="hello">Xin chào, username!</p>
+    <div class ="container">
+      <div class ="card left">
+        <form>
+        <h3>Thêm / sửa nội dung</h3>
+        <div class ="tieude">
+            <div class ="col">
+        <label>Tiêu đề</label>
+        <input type ="text" placeholder ="Tiêu đề" autocomplete="off">
+            </div>
+            <div class ="col">
+        <label>Chủ đề</label>
+        <input type ="text" placeholder ="Vd: Hoa cỏ cây lá" autocomplete="off">
+            </div>
+        </div>
+            <div class ="cols">
+        <label class ="label">Mô tả ngắn</label>
+        <input type ="text" placeholder ="Mô tả ngắn" autocomplete="off" class ="form-select">
+            </div>
+            <div class ="cols">
+        <label class="lable">Quyền hiển thị</label>
+        <select class ="form-select">
+          <option>Công khai</option>
+          <option>Riêng tư</option>
+        </select>
+            </div>
+            <div class = "nd">
+        <label>Nội dung chi tiết</label>
+        <textarea placeholder ="Nội dung chi tiết" rows="8"></textarea>
+        </div>
+        <div class ="btn">
+        <button class="save but">Lưu nội dung</button>
+        <button class ="refresh but">Làm mới</button>
+        </div>
+          </form>
+      </div>
+      <div class ="card right">
+        <div class ="top-right">
+        <h3>Danh sách bài viết</h3>
+        <input type ="text" placeholder ="Tìm theo tiêu đề...." class ="search">
+        <select value ="dai">
+          <option selected>Tất cả chủ đề </option>
+          <option>option 2</option>
+          <option>option 3</option>
+        </select>
+      </div>
+      <div class ="posted">
+          <h1>Tiêu đề</h1>
+          <h3>Chủ đề</h3>
+          <div class ="info">
+            <span class ="chude">Chủ đề: </span>
+            <span class ="tt">Ngày đăng: 2025-01-05 vào lúc 00:00:00 AM</span>
+            <span>❤️Lượt thích: </span>
+            <span>💬Bình luận: </span>
+            <br>
+            <button class ="ct">Xem chi tiết</button>
+            <button class ="ct sua ">Sửa bài viết</button>
+            <button class ="ct xoa">Xóa bài viết</button>
+            <span class="trangthai">Đây là bài viết công khai/riêng tư</span>
+        </div>
+        </div>
+        <div class ="posted">
+          <h1>Tiêu đề</h1>
+          <h3>Chủ đề</h3>
+          <div class ="info">
+            <span class ="chude">Chủ đề: </span>
+            <span class ="tt">Ngày đăng: 2025-01-05 vào lúc 00:00:00 AM</span>
+            <span>❤️Lượt thích: </span>
+            <span>💬Bình luận: </span>
+            <br>
+            <button class ="ct">Xem chi tiết</button>
+            <button class ="ct sua ">Sửa bài viết</button>
+            <button class ="ct xoa">Xóa bài viết</button>
+            <span class="trangthai">Đây là bài viết công khai/riêng tư</span>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

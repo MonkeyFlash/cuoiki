@@ -46,6 +46,18 @@ btnRegisterSubmit.addEventListener("click",function(x){
     }
     //Lay danh sach tai khoan tu localStorage
     let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+    //kiem tra ton tai
+    let tontai = false;
+    for (let i=0; i<accounts.length; i++){
+        if(accounts[i].username === user){
+            tontai=true;
+            break;
+        }
+    }
+    if(tontai){
+        alert("Tên đăng nhập đã tồn tại, vui lòng chọn tên khác nhé!");
+        return;
+    }
     //Them tai khoan
     accounts.push({username: user, password: pass});
     //Luu lai vao localStorage
@@ -76,7 +88,7 @@ btnLoginSubmit.addEventListener("click", function(x){
     }
     if(found) {
         alert("Đăng nhập thành công!!");
-        window.location.href = "quanly.html";
+        window.location.href = "noidung.html";
     } else {
         alert("Sai tài khoản hoặc mật khẩu!!");
     }
