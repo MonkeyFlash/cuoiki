@@ -1,57 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Quản lý</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="stylesheet" href="quanly.css">
 </head>
- <link rel="stylesheet" href="quanly.css">
 <body>
-   <header>
-    <div class="search-box">
-        <input type="text" placeholder="Tìm kiếm tệp..." class="search-input">
-        <button class="search-btn">🔍</button>
+  <header class="header">
+    <h2>Trang quản lý tài khoản</h2>
+    <div class = "btn-right">
+      <button class ="stats">📊Xem thống kê</button>
+      <button class ="mode">🌘Chế độ tối</button>
+      <button class ="logout">🚪Đăng xuất</button>
     </div>
-    <h3>Quản lý file của bạn</h3>
-    <button class="btn-logout">Đăng xuất</button>
-</header>
-<div class = "container">
-    <div class="main-wrapper">
-     <div class="sidebar">
-      <ul class ="action">
-        <li class ="file-action">📁 My Folders</li>
-        <li class ="file-action">📂 New Folder</li>
-        <li class ="file-action">📄 New File</li>
-        <li class ="file-action">📊 Thống kê</li>
-      </ul>
+  </header>
+     <p class ="hello">Xin chào, admin!</p>
+    <div class ="container">
+      <div class ="card left">
+        <form>
+        <h3>Thêm tài khoản mới</h3>
+        <label>Tên đăng nhập</label>
+        <input type ="text" placeholder ="Tên đăng nhập" autocomplete="off">
+        <label>Mật khẩu</label>
+        <input type ="password" placeholder ="Mật khẩu" autocomplete="new-password">
+        <label>Vai trò</label>
+        <select>
+          <option>Admin</option>
+          <option>User</option>
+        </select>
+        <button class="create">Tạo tài khoản</button>
+          </form>
+          <p class ="ss">Tạo tài khoản thành công</p>
+          <p class ="failed" >Username hoặc password không hợp lệ</p>
+      </div>
+      <div class ="card right">
+        <div class ="top-right">
+        <h3>Danh sách tài khoản</h3>
+        <input type ="text" placeholder ="Tìm tài khoản...." class ="search">
+        </div>
+        <table>
+          <thead><tr>
+            <th>Username</th>
+            <th>Vai trò</th>
+            <th>Ngày tạo</th>
+            <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>admin</td>
+              <td>Admin</td>
+              <td>2025-01-02</td>
+             <td class ="active">Đang hoạt động</td>
+            </tr>
+            <tr>
+              <td>user1</td>
+              <td>User</td>
+              <td>2025-01-03</td>
+              <td><button class="delete">Xóa</button></td>
+            </tr>
+            <tr> 
+              <td>user2</td>
+              <td>User</td>
+              <td>2025-01-03</td>
+              <td><button class="delete">Xóa</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-</div>
-    <div class="file-display">
-  <ul class="tree">
-    <li class ="li-folder">
-      <span class="folder">📁Thư mục 1</span>
-      <ul class="file">
-        <li>📄file 1</li>
-      </ul>
-    </li>
-    <li class ="li-folder">
-      <span class="folder">📁Thư mục 2 </span>
-      <ul class="file">
-        <li>📄 file 2</li>
-        <li>📄 file 3</li>
-        <li>📄 file 4</li>
-      </ul>
-    </li>
-    <li class ="li-folder">
-        <span class="folder">📁Thư mục 3 </span>
-        <ul class ="file">
-            <li>📄 file 5</li>
-            <li>📄 file 6</li>
-            <li>📄 file 7</li><li>📄 file 7</li><li>📄 file 7</li><li>📄 file 7</li>
-        </ul>
-    </li>
-  </ul>
-    </div>
-
 </body>
 </html>
