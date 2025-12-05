@@ -40,6 +40,7 @@ body {
     background: rgb(246, 111, 111);
     color: white;
 }
+
 .hello {
     margin: 10px;
     font-size: 30px;
@@ -66,6 +67,9 @@ body {
     margin: 10px 0px;
 }
 .cards p{
-    margin: 10px 0px;
+    margin-top: 20px;
     font-size: 1.2em;
+    text-align:center;
+    font-style: italic;
+    font-weight: bold;
 }
