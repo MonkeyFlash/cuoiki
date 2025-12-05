@@ -145,17 +145,6 @@ header .btn:hover{
     font-size: 1.1em;
     font-weight: 500;
 }
-footer {
-    background-color: #c75c5c;
-    color: #fff;
-    text-align: center;
-    padding: 10px 0;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    font-size: 14px;
-}
 /* .form--login{
     display:none;
 } */
