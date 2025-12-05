@@ -30,9 +30,8 @@ body {
     font-size: 20px;
 }
 .mode {
-    background: #473e3e;
+    background: #605858;
     color: white;
-    
 }
 .logout {
     background: rgb(246, 111, 111);
@@ -41,6 +40,10 @@ body {
 .hello {
     margin: 10px;
     font-size: 30px;
+}
+.a:hover {
+    opacity: 0.7;
+      transition: 0.4s;
 }
 .ss {
     color: green;
@@ -54,6 +57,8 @@ body {
 }
 .container{
     display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 30px;
 }
 .card{
@@ -61,6 +66,12 @@ body {
     border-radius: 18px;
     padding: 25px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+.card.left {
+    background-color: #E8DBFF;
+}
+.card input,select{
+    box-shadow : 0 4px 14px rgba(0,0,0,0.08);
 }
 .left {
     width: 50%;
@@ -71,7 +82,8 @@ body {
 }
 .card h3 {
     margin-bottom: 15px;
-    font-size: 1.5em;
+    font-size: 1.9em;
+    text-align: center;
 }
 .tieude {
     display:flex;
@@ -106,6 +118,7 @@ textarea{
     border-radius: 10px;
     padding: 10px;
     resize: none;
+    font-size: 1.2em;
 }
 .chude{
     display:block;
@@ -131,6 +144,7 @@ textarea{
 }
 .save {
     background-color: rgb(176, 176, 251);
+    color: white;
 
 }
 label {
@@ -145,7 +159,7 @@ input, select {
     padding: 7px 10px;
     margin-bottom: 15px;
     border: 1px solid #dcdcdc;
-    border-radius: 10px;
+    border-radius: 15px;
     font-size: 1em;
 }
 .create{
@@ -278,6 +292,7 @@ input, select {
     height: 80px;
     border-radius: 10px;
     resize: none;
+    padding: 10px;
 }
 .cmt-btn {
     background-color: rgb(176, 176, 251);

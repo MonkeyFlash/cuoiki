@@ -37,7 +37,7 @@ body {
     color: white;
 }
 .logout {
-    background: red;
+    background: rgb(246, 111, 111);
     color: white;
 }
 .hello {
@@ -49,6 +49,10 @@ body {
     display: flex;
     gap: 30px;
     justify-content: space-around;
+}
+.a:hover {
+    opacity: 0.7;
+    transition: 0.4s;
 }
 .cards{
     background: #fff;

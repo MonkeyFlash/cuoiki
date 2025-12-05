@@ -7,6 +7,10 @@ body {
     background: #f6f7fb;
     padding: 20px 40px;
 }
+.a:hover{
+    opacity: 0.7;
+    transition: 0.4s;
+}
 .header {
     display: flex;
     justify-content: space-between;
@@ -37,7 +41,7 @@ body {
     color: white;
 }
 .logout {
-    background: red;
+    background: rgb(246, 111, 111);
     color: white;
 }
 .hello {
