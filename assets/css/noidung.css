@@ -1,0 +1,230 @@
+
+
+.btn-right button {
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #2980b9;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.btn-right button:hover {
+    background-color: #1a5276;
+}
+
+.hello {
+    padding: 10px 20px;
+    background-color: #ecf0f1;
+    margin: 0;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+/* Phần bên trái - Form */
+.left {
+    flex: 1;
+    max-width: 400px;
+}
+
+.tieude, .cols, .nd {
+    margin-bottom: 15px;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+}
+
+.tieude {
+    display: flex;
+    gap: 10px;
+}
+
+.tieude .col {
+    flex: 1;
+}
+
+.left input[type="text"], 
+.left select, 
+.left textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.left textarea {
+    resize: vertical;
+}
+
+.btn {
+    display: flex;
+    gap: 10px;
+}
+
+.but {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.save {
+    background-color: #2ecc71;
+}
+
+.refresh {
+    background-color: #95a5a6;
+}
+
+/* Phần bên phải - Danh sách bài viết */
+.right {
+    flex: 2;
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.top-right h3 {
+    margin: 0;
+}
+
+.search, .topic-select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.posted {
+    /* Đảm bảo mẫu (template) bài viết ban đầu được ẩn */
+    display: none; 
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.posted h1 {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 5px;
+    color: #3498db;
+}
+
+.posted h3 {
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: #7f8c8d;
+}
+
+.posted .info button {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.chitiet { background-color: #3498db; color: white; }
+.sua { background-color: #f39c12; color: white; }
+.xoa { background-color: #e74c3c; color: white; }
+
+.trangthai {
+    display: block;
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+
+/* Modal Chung (Xem Chi Tiết & Sửa) */
+.overlay, .edit-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay.show, .edit-overlay.show {
+    display: flex;
+}
+
+.popup, .edit-popup {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Modal Sửa Cụ thể */
+.edit-popup {
+    max-width: 600px;
+}
+
+#edit-form input[type="text"], 
+#edit-form select, 
+#edit-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#edit-form .tieude {
+    display: flex;
+    gap: 10px;
+}
+#edit-form .col {
+    flex: 1;
+}
+
+.save-edit { background-color: #2ecc71; }
+.cancel-edit { background-color: #95a5a6; }

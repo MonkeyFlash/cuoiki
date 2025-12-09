@@ -1,50 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin</title>
-  <link rel="stylesheet" href="quanly.css">
-</head>
-<body>
-  <header class="header">
-    <h2>Trang quản lý tài khoản</h2>
-    <div class = "btn-right">
-      <button class ="stats a">📊Xem thống kê</button>
-      <button class ="mode a">🌘Chế độ tối</button>
-      <button class ="logout a">🚪Đăng xuất</button>
-    </div>
-  </header>
-     <p class ="hello">Xin chào, admin!</p>
-    <div class ="container">
-      <div class ="card left">
-        <form>
-        <h3>Thêm tài khoản mới</h3>
-        <label>Tên đăng nhập</label>
-        <input type ="text" placeholder ="Tên đăng nhập" autocomplete="off">
-        <label>Mật khẩu</label>
-        <input type ="password" placeholder ="Mật khẩu" autocomplete="new-password">
-        <label>Vai trò</label>
-        <select>
-          <option>Admin</option>
-          <option>User</option>
-        </select>
-        <button class="create a">Tạo tài khoản</button>
-          </form>
-          <p class ="ss">Tạo tài khoản thành công</p>
-          <p class ="failed" >Username hoặc password không hợp lệ</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <style>
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .header h2 {
+        font-size: 2.5em;
+        color: #473e3e;
+      }
+      .btn-right {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+      }
+      .btn-right button {
+        padding: 9px 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 20px;
+      }
+      .mode {
+        background: #605858;
+        color: white;
+      }
+      .logout {
+        background: rgb(249, 137, 137);
+        color: white;
+      }
+      .hello {
+        margin: 10px;
+        font-size: 30px;
+      }
+      .a:hover {
+        opacity: 0.7;
+        transition: 0.4s;
+      }
+      .ss {
+        color: green;
+        margin: 0 10px;
+        font-size: 24px;
+      }
+      .failed {
+        color: red;
+        margin: 0 10px;
+        font-size: 24px;
+      }
+      .container {
+        display: flex;
+        gap: 30px;
+        margin-top: 50px;
+      }
+      .card {
+        background: #fff;
+        border-radius: 18px;
+        padding: 25px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      }
+      .left {
+        width: 35%;
+      }
+
+      .right {
+        width: 65%;
+      }
+      .card h3 {
+        margin-bottom: 15px;
+        font-size: 1.5em;
+      }
+      label {
+        display: block;
+        margin: 10px 0px;
+        font-size: 20px;
+      }
+      input,
+      select {
+        width: 100%;
+        height: 38px;
+        padding: 7px 10px;
+        margin-bottom: 15px;
+        border: 1px solid #dcdcdc;
+        border-radius: 10px;
+        font-size: 1em;
+      }
+      .create {
+        min-width: 100%;
+        padding: 10px 0px;
+        border-radius: 25px;
+        border: none;
+        background-color: rgb(172, 172, 247);
+        font-size: 20px;
+        color: white;
+        cursor: pointer;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 20px;
+      }
+
+      th {
+        text-align: left;
+        padding: 10px 0;
+        color: #666;
+      }
+
+      td {
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .top-right {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .search {
+        width: 50%;
+        height: 36px;
+        border-radius: 10px;
+        border: 1px solid #dcdcdc;
+        padding: 5px 12px;
+      }
+      .active {
+        color: blue;
+        font-size: 18px;
+      }
+      .delete {
+        background-color: rgb(240, 96, 96);
+        font-size: 18px;
+        min-width: 100px;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="logo">
+        <a href="noidung.html">Website quản lý bài viết</a>
       </div>
-      <div class ="card right">
-        <div class ="top-right">
-        <h3>Danh sách tài khoản</h3>
-        <input type ="text" placeholder ="Tìm tài khoản...." class ="search">
+
+      <button class="theme-toggle" aria-label="Toggle light and dark mode">
+        ☀️
+      </button>
+
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        &#9776;
+      </button>
+
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li><a href="noidung.html" class="nav-item">🏠 Trang chủ</a></li>
+          <li>
+            <a href="thongkeuser.html" class="nav-item user-stat-btn"
+              >📊 Thống kê cá nhân</a
+            >
+          </li>
+
+          <li class="admin-only" style="display: none">
+            <a href="quanly.html" class="nav-item">⚙️ Quản lý Admin</a>
+          </li>
+          <li class="admin-only" style="display: none">
+            <a href="thongkeadmin.html" class="nav-item">📈 Thống kê chung</a>
+          </li>
+
+          <li>
+            <a href="#" class="nav-item auth-btn logout-link">🚪 Đăng xuất</a>
+          </li>
+          <li>
+            <a
+              href="login.html"
+              class="nav-item auth-btn login-link logout"
+              style="display: none"
+              >🔑 Đăng nhập</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <p class="hello">Xin chào, admin!</p>
+    <div class="container">
+      <div class="card left">
+        <form>
+          <h3>Thêm tài khoản mới</h3>
+          <label>Tên đăng nhập</label>
+          <input type="text" placeholder="Tên đăng nhập" autocomplete="off" />
+          <label>Mật khẩu</label>
+          <input
+            type="password"
+            placeholder="Mật khẩu"
+            autocomplete="new-password"
+          />
+          <label>Vai trò</label>
+          <select>
+            <option>Admin</option>
+            <option>User</option>
+          </select>
+          <button class="create a">Tạo tài khoản</button>
+        </form>
+        <p class="ss">Tạo tài khoản thành công</p>
+        <p class="failed">Username hoặc password không hợp lệ</p>
+      </div>
+      <div class="card right">
+        <div class="top-right">
+          <h3>Danh sách tài khoản</h3>
+          <input type="text" placeholder="Tìm tài khoản...." class="search" />
         </div>
         <table>
-          <thead><tr>
-            <th>Username</th>
-            <th>Vai trò</th>
-            <th>Ngày tạo</th>
-            <th>Hành động</th>
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Vai trò</th>
+              <th>Ngày tạo</th>
+              <th>Hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -52,7 +231,7 @@
               <td>admin</td>
               <td>Admin</td>
               <td>2025-01-02</td>
-             <td class ="active">Đang hoạt động</td>
+              <td class="active">Đang hoạt động</td>
             </tr>
             <tr>
               <td>user1</td>
@@ -60,34 +239,200 @@
               <td>2025-01-03</td>
               <td><button class="delete a">Xóa</button></td>
             </tr>
-            <tr> 
+            <tr>
               <td>user2</td>
               <td>User</td>
               <td>2025-01-03</td>
               <td><button class="delete a">Xóa</button></td>
             </tr>
-            <tr> 
+            <tr>
               <td>user2</td>
               <td>User</td>
               <td>2025-01-03</td>
               <td><button class="delete a">Xóa</button></td>
             </tr>
-            <tr> 
+            <tr>
               <td>user2</td>
               <td>User</td>
               <td>2025-01-03</td>
               <td><button class="delete a">Xóa</button></td>
             </tr>
-            <tr> 
+            <tr>
               <td>user2</td>
               <td>User</td>
               <td>2025-01-03</td>
               <td><button class="delete a">Xóa</button></td>
             </tr>
-            
           </tbody>
         </table>
       </div>
     </div>
-</body>
+  </body>
+  <script src="layout.js"></script>
+  <script>
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    const userRole = localStorage.getItem("loggedInUserRole");
+
+    const helloElement = document.querySelector(".hello");
+    const btnLogout = document.querySelector(".logout");
+    const createButton = document.querySelector(".create");
+    const form = document.querySelector(".card.left form");
+    const usernameInput = form.querySelector("input:nth-of-type(1)");
+    const passwordInput = form.querySelector("input:nth-of-type(2)");
+    const roleSelect = form.querySelector("select");
+    const successMessage = document.querySelector(".ss");
+    const failedMessage = document.querySelector(".failed");
+    const tbody = document.querySelector("table tbody");
+    const searchInput = document.querySelector(".search");
+    const btnStats = document.querySelector(".stats");
+
+    // Ẩn thông báo mặc định
+    successMessage.style.display = "none";
+    failedMessage.style.display = "none";
+
+    // Hàm lấy danh sách tài khoản
+    const getAccounts = () => {
+      return JSON.parse(localStorage.getItem("accounts")) || [];
+    };
+
+    // 1. KIỂM TRA QUYỀN VÀ HIỂN THỊ THÔNG TIN USER
+
+    // Chỉ cho phép admin truy cập trang này
+    if (userRole !== "admin" || !loggedInUser) {
+      alert("Bạn không có quyền truy cập trang quản lý này.");
+      window.location.href = "noidung.html";
+    } else {
+      helloElement.textContent = `Xin chào, ${loggedInUser} (${userRole})!`;
+    }
+
+    // 2. THÊM TÀI KHOẢN MỚI
+
+    createButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      successMessage.style.display = "none";
+      failedMessage.style.display = "none";
+
+      const user = usernameInput.value.trim();
+      const pass = passwordInput.value.trim();
+      const role = roleSelect.value.toLowerCase();
+
+      if (user.length < 3 || pass.length < 6) {
+        failedMessage.textContent =
+          "Tên đăng nhập (ít nhất 3 ký tự) hoặc Mật khẩu (ít nhất 6 ký tự) không hợp lệ.";
+        failedMessage.style.display = "block";
+        return;
+      }
+
+      let accounts = getAccounts();
+      const existingAccount = accounts.find((acc) => acc.username === user);
+
+      if (existingAccount) {
+        failedMessage.textContent =
+          "Tên đăng nhập đã tồn tại, vui lòng chọn tên khác.";
+        failedMessage.style.display = "block";
+        return;
+      }
+
+      // Thêm tài khoản mới
+      const newAccount = {
+        username: user,
+        password: pass,
+        role: role,
+        dateCreated: new Date().toISOString().split("T")[0],
+      };
+
+      accounts.push(newAccount);
+      localStorage.setItem("accounts", JSON.stringify(accounts));
+
+      successMessage.textContent = `Tạo tài khoản ${user} (${role}) thành công!`;
+      successMessage.style.display = "block";
+
+      usernameInput.value = "";
+      passwordInput.value = "";
+      displayAccounts(accounts);
+    });
+
+    // 3. HIỂN THỊ DANH SÁCH TÀI KHOẢN
+
+    function displayAccounts(accountsToShow) {
+      tbody.innerHTML = "";
+
+      if (accountsToShow.length === 0) {
+        tbody.innerHTML =
+          '<tr><td colspan="4">Không tìm thấy tài khoản nào.</td></tr>';
+        return;
+      }
+
+      accountsToShow.forEach((account) => {
+        const isCurrentUser = account.username === loggedInUser;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${account.username}</td>
+            <td>${account.role}</td>
+            <td>${account.dateCreated || "N/A"}</td>
+            <td>
+                ${
+                  isCurrentUser
+                    ? `<span class="active">Đang hoạt động</span>`
+                    : `<button class="delete a" data-username="${account.username}">Xóa</button>`
+                }
+            </td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      tbody.querySelectorAll(".delete").forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const userToDelete = e.target.dataset.username;
+          handleDeleteAccount(userToDelete);
+        });
+      });
+    }
+
+    // 4. XỬ LÝ TÌM KIẾM
+
+    searchInput.addEventListener("input", () => {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      const accounts = getAccounts();
+
+      const filteredAccounts = accounts.filter((account) => {
+        return (
+          account.username.toLowerCase().includes(searchTerm) ||
+          account.role.toLowerCase().includes(searchTerm)
+        );
+      });
+
+      displayAccounts(filteredAccounts);
+    });
+
+    // 5. XỬ LÝ XÓA TÀI KHOẢN
+
+    function handleDeleteAccount(username) {
+      if (username === loggedInUser) {
+        alert("Bạn không thể tự xóa tài khoản của mình!");
+        return;
+      }
+
+      if (
+        !confirm(`Bạn có chắc chắn muốn xóa tài khoản "${username}" không?`)
+      ) {
+        return;
+      }
+
+      let accounts = getAccounts();
+      const updatedAccounts = accounts.filter(
+        (acc) => acc.username !== username
+      );
+
+      localStorage.setItem("accounts", JSON.stringify(updatedAccounts));
+      alert(`Tài khoản ${username} đã được xóa.`);
+
+      displayAccounts(updatedAccounts);
+    }
+
+    // CHẠY CHỨC NĂNG KHI TẢI TRANG LẦN ĐẦU
+    const initialAccounts = getAccounts();
+    displayAccounts(initialAccounts);
+  </script>
 </html>

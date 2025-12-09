@@ -34,19 +34,31 @@ btnToLogin.addEventListener("click",function(x){
     formLogin.style.transform = 'translateX(0px)';
     formRegister.style.transform = "translateX(400px)";
 })
-//xu ly dang ky
+
 btnRegisterSubmit.addEventListener("click",function(x){
     x.preventDefault();
     let user = document.getElementById("reg--user").value.trim();
     let pass = document.getElementById("reg--pass").value.trim();
-    //kiemtra rong
+    
+    // Kiểm tra rỗng
      if (user === "" || pass === "") {
         alert("Vui lòng nhập đầy đủ tài khoản và mật khẩu!");
         return;
     }
-    //Lay danh sach tai khoan tu localStorage
+    
+    // LOGIC GÁN ROLE
+    let role = 'user';
+    if (user.toLowerCase() === 'admin') {
+        role = 'admin';
+    }
+    
+    // Lấy ngày hiện tại ở định dạng yyyy-mm-dd
+    const dateCreated = new Date().toISOString().split('T')[0];
+
+    // Lay danh sach tai khoan tu localStorage
     let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
-    //kiem tra ton tai
+    
+    // Kiem tra ton tai (giữ nguyên)
     let tontai = false;
     for (let i=0; i<accounts.length; i++){
         if(accounts[i].username === user){
@@ -58,36 +70,52 @@ btnRegisterSubmit.addEventListener("click",function(x){
         alert("Tên đăng nhập đã tồn tại, vui lòng chọn tên khác nhé!");
         return;
     }
-    //Them tai khoan
-    accounts.push({username: user, password: pass});
-    //Luu lai vao localStorage
+    
+    // Them tai khoan (Bổ sung role và dateCreated vào object)
+    accounts.push({
+        username: user, 
+        password: pass,
+        role: role, 
+        dateCreated: dateCreated
+    });
+    
+    // Luu lai vao localStorage
     localStorage.setItem("accounts", JSON.stringify(accounts));
-    alert("Đăng ký thành công, hãy đăng nhập");
+    alert(`Đăng ký thành công với vai trò: ${role}! Ngày tạo: ${dateCreated}. Hãy đăng nhập`);
     formLogin.style.transform = 'translateX(0px)';
     formRegister.style.transform = "translateX(400px)";
 })
-//xu lu dang nhap
+
 btnLoginSubmit.addEventListener("click", function(x){
     x.preventDefault();
     let user = document.getElementById("log--user").value.trim();
     let pass = document.getElementById("log--pass").value.trim();
-    //kiemtra rong
+    
+    // Kiem tra rong
      if (user === "" || pass === "") {
         alert("Vui lòng nhập đầy đủ tài khoản và mật khẩu!");
         return;
     }
-    //Lay danh sach tai khoan tu localStorage
+    
+    // Lay danh sach tai khoan tu localStorage
     let accounts = JSON.parse(localStorage.getItem("accounts"))  || [];
-    //kiem tra tai khoan va mat khay co trung khop
-    let found = false;
+    
+    // Kiem tra tai khoan va mat khau co trung khop
+    let foundAccount = null;
     for (let i = 0; i < accounts.length; i++){
         if (accounts[i].username === user && accounts[i].password === pass){
-            found = true;
+            foundAccount = accounts[i];
             break;
         }
     }
-    if(found) {
+    
+    if(foundAccount) {
         alert("Đăng nhập thành công!!");
+        
+        localStorage.setItem('loggedInUser', foundAccount.username); 
+        localStorage.setItem('loggedInUserRole', foundAccount.role); 
+        console.log(`Đã lưu user: ${foundAccount.username} với role: ${foundAccount.role}`);
+        
         window.location.href = "noidung.html";
     } else {
         alert("Sai tài khoản hoặc mật khẩu!!");

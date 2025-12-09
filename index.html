@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản Lý Blog</title>
+    <link rel="stylesheet" href="/assets/css/layout.css" />
+    <link rel="stylesheet" href="/assets/css/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1 class="gt">Website quản bài viết</h1>
+      <button class="btn">Đăng nhập / Đăng ký</button>
+    </header>
+    <div class="container">
+      <span class="close"> <ion-icon name="close-outline"></ion-icon></span>
+      <div class="form--login">
+        <h2>Đăng nhập</h2>
+        <form action="#">
+          <div class="input--login">
+            <input
+              type="text"
+              required
+              placeholder="Username"
+              autocomplete="off"
+              class="input"
+              id="log--user"
+            />
+            <label>Tài khoản</label>
+          </div>
+          <div class="input--login">
+            <input
+              type="password"
+              required
+              placeholder="Password"
+              autocomplete="new-password"
+              class="input"
+              id="log--pass"
+            />
+            <label>Mật Khẩu</label>
+          </div>
+          <div class="login--res">
+            <button class="btn--log--res toLogin">Đăng nhập</button>
+            <button class="btn--log--res toRes">Đăng ký</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="form--res">
+        <h2>Đăng ký</h2>
+        <form action="#">
+          <div class="input--login">
+            <input
+              type="text"
+              required
+              placeholder="Username"
+              autocomplete="off"
+              class="input"
+              id="reg--user"
+            />
+            <label>Tài khoản</label>
+          </div>
+          <div class="input--login">
+            <input
+              type="password"
+              required
+              placeholder="Password"
+              autocomplete="new-password"
+              class="input"
+              id="reg--pass"
+            />
+            <label>Mật Khẩu</label>
+          </div>
+          <div class="login--res">
+            <button class="btn--log--res toLogin">Đăng nhập</button>
+            <button class="btn--log--res toRes">Đăng ký</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+    nomodule
+    src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+  ></script>
+  <script src="/assets/js/auth.js"></script>
+</html>

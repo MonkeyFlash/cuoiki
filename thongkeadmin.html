@@ -1,47 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thống Kê</title>
-</head>
-<link rel="stylesheet" href="thongkeadmin.css">
-<body>
-   <header class="header">
-    <h2>Trang thống kê dành cho admin</h2>
-    <div class = "btn-right">
-      <button class ="stats a">👤Trang admin</button>
-      <button class ="mode a">🌘Chế độ tối</button>
-      <button class ="logout a">🚪Đăng xuất</button>
-    </div>
+  </head>
+  <link rel="stylesheet" href="/assets/css/thongkeadmin.css" />
+  <link rel="stylesheet" href="/assets/css/layout.css" />
+  <body>
+    <header class="main-header">
+      <div class="logo">
+        <a href="noidung.html">Website quản lý bài viết</a>
+      </div>
+
+      <button class="theme-toggle" aria-label="Toggle light and dark mode">
+        ☀️
+      </button>
+
+      <button class="menu-toggle" aria-label="Toggle navigation">
+        &#9776;
+      </button>
+
+      <nav class="main-nav">
+        <ul class="nav-list">
+          <li><a href="noidung.html" class="nav-item">🏠 Trang chủ</a></li>
+          <li>
+            <a href="thongkeuser.html" class="nav-item user-stat-btn"
+              >📊 Thống kê cá nhân</a
+            >
+          </li>
+
+          <li class="admin-only" style="display: none">
+            <a href="quanly.html" class="nav-item">⚙️ Quản lý Admin</a>
+          </li>
+          <li class="admin-only" style="display: none">
+            <a href="thongkeadmin.html" class="nav-item">📈 Thống kê chung</a>
+          </li>
+
+          <li>
+            <a href="#" class="nav-item auth-btn logout-link">🚪 Đăng xuất</a>
+          </li>
+          <li>
+            <a
+              href="login.html"
+              class="nav-item auth-btn login-link logout"
+              style="display: none"
+              >🔑 Đăng nhập</a
+            >
+          </li>
+        </ul>
+      </nav>
     </header>
-     <p class ="hello">Xin chào, admin!</p>
-    <div class ="container">
-        <div class ="cards">
-            <h2>👤Tổng user</h2>
-            <p>5</p>
-            <p>Số tài khoản có role là user</p>
-        </div>
-          <div class ="cards">
-            <h2>📝Tổng bài viết</h2>
-            <p>4</p>
-            <p>Số bài viết public và private</p>
-        </div>
-          <div class ="cards">
-            <h2>🌐Bài viết công khai (public)</h2>
-            <p>6</p>
-            <p>Bài viết mà mọi người có thể xem</p>
-        </div>
-          <div class ="cards">
-            <h2>❤️Lượt thích</h2>
-            <p>5</p>
-            <p>Tổng số likes toàn hệ thống</p>
-        </div>
-        <div class ="cards">
-            <h2>💬Bình luận</h2>
-            <p>6</p>
-            <p>Tổng số comments toàn hệ thống</p>
-        </div>
+    <p class="hello">Xin chào, admin!</p>
+    <div class="container">
+      <div class="cards">
+        <h2>👤Tổng user</h2>
+        <p>5</p>
+        <p>Số tài khoản có role là user</p>
+      </div>
+      <div class="cards">
+        <h2>📝Tổng bài viết</h2>
+        <p>4</p>
+        <p>Số bài viết public và private</p>
+      </div>
+      <div class="cards">
+        <h2>🌐Bài viết công khai (public)</h2>
+        <p>6</p>
+        <p>Bài viết mà mọi người có thể xem</p>
+      </div>
+      <div class="cards">
+        <h2>❤️Lượt thích</h2>
+        <p>5</p>
+        <p>Tổng số likes toàn hệ thống</p>
+      </div>
+      <div class="cards">
+        <h2>💬Bình luận</h2>
+        <p>6</p>
+        <p>Tổng số comments toàn hệ thống</p>
+      </div>
     </div>
-</body>
+  </body>
+  <script src="/assets/js/layout.js"></script>
+  <script>
+
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    const userRole = localStorage.getItem("loggedInUserRole");
+
+    const helloElement = document.querySelector(".hello");
+    const btnLogout = document.querySelector(".logout");
+    const btnAdminPage = document.querySelector(".stats");
+    const cards = document.querySelectorAll(".cards");
+
+    const getAccounts = () =>
+      JSON.parse(localStorage.getItem("accounts")) || [];
+    const getPosts = () => JSON.parse(localStorage.getItem("posts")) || [];
+
+    // 1. KIỂM TRA QUYỀN ADMIN
+
+    if (userRole !== "admin" || !loggedInUser) {
+      alert("Bạn không có quyền truy cập trang thống kê này.");
+      window.location.href = "noidung.html";
+    } else {
+      helloElement.textContent = `Xin chào, ${loggedInUser} (${userRole})!`;
+    }
+
+    // 2. HÀM TÍNH TOÁN VÀ THỐNG KÊ
+
+    function calculateStatistics() {
+      const accounts = getAccounts();
+      const posts = getPosts();
+
+      // --- 1. Thống kê User ---
+      const totalUsers = accounts.length;
+      const totalUserRole = accounts.filter(
+        (acc) => acc.role === "user"
+      ).length;
+
+      // --- 2. Thống kê Bài viết ---
+      const totalPosts = posts.length;
+      const publicPosts = posts.filter(
+        (post) => post.visibility === "Công khai"
+      ).length;
+
+      // Tính tổng Likes
+      const totalLikes = posts.reduce(
+        (sum, post) => sum + (post.likes || 0),
+        0
+      );
+
+      // Tính tổng Comments
+      const totalComments = posts.reduce(
+        (sum, post) => sum + (post.comments ? post.comments.length : 0),
+        0
+      );
+
+      // Trả về một đối tượng chứa tất cả kết quả
+      return {
+        totalUsers,
+        totalUserRole,
+        totalPosts,
+        publicPosts,
+        totalLikes,
+        totalComments,
+      };
+    }
+
+    // 3. HIỂN THỊ KẾT QUẢ RA GIAO DIỆN
+
+    function displayStats() {
+      const stats = calculateStatistics();
+
+      // 1. Tổng user
+      cards[0].querySelector("p:nth-of-type(1)").textContent = stats.totalUsers;
+      cards[0].querySelector(
+        "p:nth-of-type(2)"
+      ).textContent = `Số tài khoản có role là user: ${stats.totalUserRole}`;
+
+      // 2. Tổng bài viết
+      cards[1].querySelector("p:nth-of-type(1)").textContent = stats.totalPosts;
+      cards[1].querySelector(
+        "p:nth-of-type(2)"
+      ).textContent = `Bao gồm cả bài công khai và riêng tư`;
+
+      // 3. Bài viết công khai
+      cards[2].querySelector("p:nth-of-type(1)").textContent =
+        stats.publicPosts;
+      cards[2].querySelector(
+        "p:nth-of-type(2)"
+      ).textContent = `Bài viết mà mọi người có thể xem`;
+
+      // 4. Tổng Lượt thích
+      cards[3].querySelector("p:nth-of-type(1)").textContent = stats.totalLikes;
+      cards[3].querySelector(
+        "p:nth-of-type(2)"
+      ).textContent = `Tổng số likes toàn hệ thống`;
+
+      // 5. Tổng Bình luận
+      cards[4].querySelector("p:nth-of-type(1)").textContent =
+        stats.totalComments;
+      cards[4].querySelector(
+        "p:nth-of-type(2)"
+      ).textContent = `Tổng số comments toàn hệ thống`;
+    }
+
+    displayStats();
+  </script>
 </html>

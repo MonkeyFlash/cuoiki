@@ -3,18 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog</title>
-  <link rel="stylesheet" href="noidung.css">
+  <title>Quản Lý Blog</title>
+  <link rel="stylesheet" href="/assets/css/noidung.css"> 
+  <link rel="stylesheet" href="/assets/css/layout.css">
 </head>
 <body>
-  <header class="header">
-    <h2>Trang quản lý tài khoản</h2>
-    <div class = "btn-right">
-      <button class ="stats a">📊Xem thống kê</button>
-      <button class ="mode a">🌘Chế độ tối</button>
-      <button class ="logout a">🚪Đăng xuất</button>
+  <header class="main-header">
+    <div class="logo">
+        <a href="noidung.html">Website quản lý bài viết</a>
     </div>
-  </header>
+    
+    <button class="theme-toggle" aria-label="Toggle light and dark mode">
+        ☀️
+    </button>
+    
+    <button class="menu-toggle" aria-label="Toggle navigation">
+        &#9776; 
+    </button>
+
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li><a href="noidung.html" class="nav-item">🏠 Trang chủ</a></li>
+            <li><a href="thongkeuser.html" class="nav-item user-stat-btn">📊 Thống kê cá nhân</a></li>
+
+            <li class="admin-only" style="display: none;"><a href="quanly.html" class="nav-item">⚙️ Quản lý Admin</a></li>
+            <li class="admin-only" style="display: none;"><a href="thongkeadmin.html" class="nav-item">📈 Thống kê chung</a></li>
+            
+            <li><a href="#" class="nav-item auth-btn logout-link">🚪 Đăng xuất</a></li>
+            <li><a href="login.html" class="nav-item auth-btn login-link logout" style="display: none;">🔑 Đăng nhập</a></li>
+        </ul>
+    </nav>
+</header>
      <p class ="hello">Xin chào, username!</p>
     <div class ="container">
       <div class ="card left">
@@ -25,31 +44,31 @@
         <div class ="tieude">
             <div class ="col">
         <label>Tiêu đề</label>
-        <input type ="text" placeholder ="Tiêu đề" autocomplete="off">
+        <input type ="text" placeholder ="Tiêu đề" autocomplete="off" id="post-title">
             </div>
             <div class ="col">
         <label>Chủ đề</label>
-        <input type ="text" placeholder ="Vd: Hoa cỏ cây lá" autocomplete="off">
+        <input type ="text" placeholder ="Vd: Hoa cỏ cây lá" autocomplete="off" id="post-topic">
             </div>
         </div>
             <div class ="cols">
         <label class ="label">Mô tả ngắn</label>
-        <input type ="text" placeholder ="Mô tả ngắn" autocomplete="off" class ="form-select">
+        <input type ="text" placeholder ="Mô tả ngắn" autocomplete="off" class ="form-select" id="post-description">
             </div>
             <div class ="cols">
         <label class="lable">Quyền hiển thị</label>
-        <select class ="form-select">
+        <select class ="form-select" id="post-visibility">
           <option>Công khai</option>
           <option>Riêng tư</option>
         </select>
             </div>
             <div class = "nd">
         <label>Nội dung chi tiết</label>
-        <textarea placeholder ="Nội dung chi tiết" rows="8"></textarea>
+        <textarea placeholder ="Nội dung chi tiết" rows="8" id="post-content"></textarea>
         </div>
         <div class ="btn">
-        <button class="save but a ">Lưu nội dung</button>
-        <button class ="refresh but a">Làm mới</button>
+        <button type="submit" class="save but a ">Lưu nội dung</button>
+        <button type="button" class ="refresh but a">Làm mới</button>
         </div>
           </form>
       </div>
@@ -57,18 +76,17 @@
         <div class ="top-right">
         <h3>Danh sách bài viết</h3>
         <input type ="text" placeholder ="Tìm theo tiêu đề...." class ="search">
-        <select value ="dai">
+        <select value ="dai" class="topic-select">
           <option selected>Tất cả chủ đề </option>
-          <option>option 2</option>
-          <option>option 3</option>
         </select>
       </div>
-      <div class ="posted">
+      
+      <div class ="posted" style="display: none;"> 
           <h1>Tiêu đề</h1>
           <h3>Chủ đề</h3>
           <div class ="info">
             <span class ="chude">Chủ đề: </span>
-            <span class ="tt">Ngày đăng: 2025-01-05 vào lúc 00:00:00 AM</span>
+            <span class ="tt">Ngày đăng: </span>
             <span>❤️Lượt thích: </span>
             <span>💬Bình luận: </span>
             <br>
@@ -78,53 +96,56 @@
             <span class="trangthai">Đây là bài viết công khai/riêng tư</span>
         </div>
         </div>
-        <div class ="posted">
-          <h1>Tiêu đề</h1>
-          <h3>Chủ đề</h3>
-          <div class ="info">
-            <span class ="chude">Chủ đề: </span>
-            <span class ="tt">Ngày đăng: 2025-01-05 vào lúc 00:00:00 AM</span>
-            <span>❤️Lượt thích: </span>
-            <span>💬Bình luận: </span>
-            <br>
-            <button class ="ct chitiet a" >Xem chi tiết</button>
-            <button class ="ct sua a">Sửa bài viết</button>
-            <button class ="ct xoa a">Xóa bài viết</button>
-            <span class="trangthai">Đây là bài viết công khai/riêng tư</span>
         </div>
-        </div>
-    </div>
+    
     <div class ="overlay">
       <div class ="popup">
         <span class="close-popup">X</span>
         <div class ="popup-content">
-          <h2>Tiêu đề bài viết</h2>
-          <p>Ngày đăng: 2025- 01-05 vào lúc 00:00:00 AM</p>
-          <p>Chủ đề: Chủ đề 1</p>
-          <div class ="like">
-            <button class ="like-btn a">❤️ Thích</button>
-            <span class ="like-count a">0 Lượt thích</span>
-          </div>
-          <h3>Bình luận</h3>
-          <p>Chưa có bình luận</p>
-          <div class ="cmt">
-            <textarea placeholder ="Viết bình luận..." rows="4"></textarea>
-            <button class ="cmt-btn a">Gửi bình luận</button>
           </div>
       </div>
     </div>
-</body>
-<script>
-  let show = document.querySelectorAll(".chitiet");
-  let overlay = document.querySelector(".overlay");
-  let closePopup = document.querySelector(".close-popup");
-  show.forEach(btn => {
-  btn.addEventListener("click", function() {
-    overlay.classList.add("show");
-  });
-});
-  closePopup.addEventListener("click", function() {
-    overlay.classList.remove("show");
-  });
-</script>
+
+    <div class ="overlay edit-overlay">
+      <div class ="popup edit-popup">
+        <span class="close-popup edit-close-popup">X</span>
+        <div class ="popup-content">
+          <h2>Sửa Bài Viết</h2>
+          <form id="edit-form">
+            <input type="hidden" id="edit-post-id"> <div class ="tieude">
+                <div class ="col">
+                    <label>Tiêu đề</label>
+                    <input type ="text" id="edit-title" placeholder ="Tiêu đề" autocomplete="off">
+                </div>
+                <div class ="col">
+                    <label>Chủ đề</label>
+                    <input type ="text" id="edit-topic" placeholder ="Vd: Hoa cỏ cây lá" autocomplete="off">
+                </div>
+            </div>
+            <div class ="cols">
+                <label class ="label">Mô tả ngắn</label>
+                <input type ="text" id="edit-description" placeholder ="Mô tả ngắn" autocomplete="off" class ="form-select">
+            </div>
+            <div class ="cols">
+                <label class="lable">Quyền hiển thị</label>
+                <select id="edit-visibility" class ="form-select">
+                    <option>Công khai</option>
+                    <option>Riêng tư</option>
+                </select>
+            </div>
+            <div class = "nd">
+                <label>Nội dung chi tiết</label>
+                <textarea id="edit-content" placeholder ="Nội dung chi tiết" rows="8"></textarea>
+            </div>
+            <div class ="btn">
+                <button type="submit" class="save-edit but a ">Lưu thay đổi</button>
+                <button type="button" class ="cancel-edit but a">Hủy</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </body>
+    <script src="/assets/js/noidung.js"></script>
+  <script src="/assets/js/layout.js"></script> 
 </html>
