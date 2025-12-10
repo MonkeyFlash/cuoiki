@@ -114,9 +114,13 @@ btnLoginSubmit.addEventListener("click", function(x){
         
         localStorage.setItem('loggedInUser', foundAccount.username); 
         localStorage.setItem('loggedInUserRole', foundAccount.role); 
-        console.log(`Đã lưu user: ${foundAccount.username} với role: ${foundAccount.role}`);
         
-        window.location.href = "noidung.html";
+        //neu la adim se toi trang admin, user thi toi trang cua user
+        if(foundAccount.role === "admin"){
+            window.location.href = "quanly.html";
+        } else {
+            window.location.href ="noidung.html";
+        }
     } else {
         alert("Sai tài khoản hoặc mật khẩu!!");
     }
