@@ -270,10 +270,10 @@ function showPostDetails(postId) {
     if (!post) return;
 
     // KIỂM TRA QUYỀN RIÊNG TƯ: Nếu là Riêng tư VÀ không phải tác giả, không cho xem
-    if (post.visibility === 'Riêng tư' && post.author !== loggedInUser) {
-         alert("Bạn không có quyền xem bài viết riêng tư này.");
-         return; 
-    }
+    if (post.visibility === 'Riêng tư' && post.author !== loggedInUser && !isAdmin()) {
+         alert("Bạn không có quyền xem bài viết riêng tư này.");
+         return; 
+    }
 
     const likedByArray = post.likedBy || [];
     
