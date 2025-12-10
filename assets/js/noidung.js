@@ -16,6 +16,7 @@ const postsContainer = document.querySelector('.card.right').lastElementChild.pa
 const postTemplate = document.querySelector('.posted'); 
 const searchInput = document.querySelector('.search');
 const topicSelect = document.querySelector('.topic-select');
+const postFormCard = document.querySelector('.card.left'); // Thêm để kiểm soát quyền Admin
 
 // Modal Xem Chi Tiết
 const viewOverlay = document.querySelector('.overlay:not(.edit-overlay)');
@@ -35,6 +36,18 @@ const closeEditPopup = document.querySelector('.edit-close-popup');
 const cancelEditButton = document.querySelector('.cancel-edit');
 
 
+// === CÁC HÀM KIỂM TRA QUYỀN VÀ VAI TRÒ ===
+
+function getCurrentUserRole() {
+    const users = JSON.parse(localStorage.getItem('accounts')) || [];
+    const currentUserData = users.find(u => u.username === loggedInUser);
+    return currentUserData ? currentUserData.role : 'user'; 
+}
+
+function isAdmin() {
+    return getCurrentUserRole() === 'admin';
+}
+
 // 1. CHỨC NĂNG CƠ BẢN (USER & POSTS)
 
 // Hàm lấy tất cả bài viết đã lưu
@@ -44,7 +57,17 @@ const getPosts = () => {
 
 // Kiểm tra đăng nhập và hiển thị tên người dùng
 if (loggedInUser) {
-    helloElement.textContent = `Xin chào, ${loggedInUser}!`;
+    const role = isAdmin() ? 'Admin' : 'Người dùng';
+    helloElement.textContent = `Xin chào, ${loggedInUser}! (Vai trò: ${role})`;
+
+    // Phân quyền Admin: Ẩn Form Thêm/Sửa nội dung cho Admin
+    if (isAdmin()) {
+        // Admin chỉ có quyền xóa, không có quyền đăng/sửa bài
+        postFormCard.style.display = 'none'; 
+    } else {
+        // Chỉ User mới được dùng Form đăng bài
+        postFormCard.style.display = 'block'; 
+    }
 } else {
     alert("Bạn chưa đăng nhập. Vui lòng đăng nhập lại.");
     window.location.href = "/"; 
@@ -69,6 +92,12 @@ refreshButton.addEventListener('click', () => {
 // Xử lý Thêm Bài Viết
 saveButton.addEventListener('click', (e) => {
     e.preventDefault(); 
+
+    // CHẶN: Admin không có quyền đăng bài
+    if (isAdmin()) {
+        alert("Admin không có quyền đăng bài viết mới.");
+        return;
+    }
     
     const title = titleInput.value.trim();
     const topic = topicInput.value.trim();
@@ -123,8 +152,22 @@ function displayPosts(postsToShow) {
         return;
     }
 
+    // Lọc theo Quyền riêng tư (Chỉ hiển thị bài riêng tư cho chính tác giả)
+    const visiblePosts = postsToShow.filter(post => {
+        // Nếu là 'Công khai', hiển thị cho tất cả
+        if (post.visibility === 'Công khai') {
+            return true;
+        }
+        // Nếu là 'Riêng tư', chỉ hiển thị cho chính tác giả
+        if (post.visibility === 'Riêng tư' && post.author === loggedInUser) {
+            return true;
+        }
+        // Nếu là 'Riêng tư' và không phải tác giả, ẩn
+        return false;
+    });
+
     // 2. Duyệt qua từng bài viết mới
-    postsToShow.forEach(post => {
+    visiblePosts.forEach(post => {
         const postElement = postTemplate.cloneNode(true); 
         
         postElement.querySelector('h1').textContent = post.title;
@@ -147,10 +190,25 @@ function displayPosts(postsToShow) {
         editBtn.addEventListener('click', () => prepareEdit(post.id));
         deleteBtn.addEventListener('click', () => deletePost(post.id));
 
-        // Ẩn nút Sửa/Xóa nếu không phải tác giả
+        // Ẩn/Hiện nút Sửa/Xóa dựa trên vai trò và quyền sở hữu
+        
+        // Nút Sửa: Chỉ hiện nếu là tác giả
         if (post.author !== loggedInUser) {
             editBtn.style.display = 'none';
+        } else {
+            editBtn.style.display = 'inline-block';
+        }
+        
+        // Nút Xóa: Hiện nếu là tác giả HOẶC là Admin
+        if (post.author !== loggedInUser && !isAdmin()) {
             deleteBtn.style.display = 'none';
+        } else {
+            deleteBtn.style.display = 'inline-block';
+        }
+        
+        // Quan trọng: Admin chỉ được XÓA, không được SỬA bài của người khác
+        if (isAdmin() && post.author !== loggedInUser) {
+             editBtn.style.display = 'none';
         }
         
         postElement.style.display = 'block'; 
@@ -178,7 +236,7 @@ function filterAndSearchPosts() {
         });
     }
 
-    // 3. Hiển thị kết quả
+    // 3. Hiển thị kết quả (Hàm displayPosts sẽ xử lý lọc quyền riêng tư)
     displayPosts(filteredPosts);
     updateTopicOptions(posts); 
 }
@@ -210,6 +268,12 @@ function showPostDetails(postId) {
     const post = posts.find(p => p.id === postId);
 
     if (!post) return;
+
+    // KIỂM TRA QUYỀN RIÊNG TƯ: Nếu là Riêng tư VÀ không phải tác giả, không cho xem
+    if (post.visibility === 'Riêng tư' && post.author !== loggedInUser) {
+         alert("Bạn không có quyền xem bài viết riêng tư này.");
+         return; 
+    }
 
     const likedByArray = post.likedBy || [];
     
@@ -278,6 +342,12 @@ function prepareEdit(postId) {
 
     if (!post) return;
 
+    // KIỂM TRA QUYỀN SỬA: Chỉ cho phép tác giả sửa bài viết của mình
+    if (post.author !== loggedInUser) {
+        alert("Bạn chỉ có thể sửa bài viết của chính mình.");
+        return;
+    }
+
     // Đổ dữ liệu vào Form Sửa
     editPostIdInput.value = post.id;
     editTitleInput.value = post.title;
@@ -297,9 +367,11 @@ editForm.addEventListener('submit', (e) => {
     
     let posts = getPosts();
     const postIndex = posts.findIndex(p => p.id === postIdToEdit);
+    const post = posts[postIndex];
     
-    if (postIndex === -1) {
-        alert("Không tìm thấy bài viết để sửa.");
+    // Kiểm tra quyền lại một lần nữa
+    if (postIndex === -1 || post.author !== loggedInUser) {
+        alert("Không tìm thấy bài viết hoặc bạn không có quyền sửa.");
         return;
     }
     
@@ -326,11 +398,21 @@ cancelEditButton.addEventListener("click", () => editOverlay.classList.remove("s
 // 6. XỬ LÝ XÓA BÀI VIẾT
 
 function deletePost(postId) {
+    let posts = getPosts();
+    const postToDelete = posts.find(p => p.id === postId);
+
+    if (!postToDelete) return;
+
+    // KIỂM TRA QUYỀN XÓA: Hoặc là tác giả, hoặc là Admin
+    if (postToDelete.author !== loggedInUser && !isAdmin()) {
+        alert("Bạn không có quyền xóa bài viết này.");
+        return;
+    }
+
     if (!confirm("Bạn có chắc chắn muốn xóa bài viết này không?")) {
         return;
     }
 
-    let posts = getPosts();
     // Lọc ra các bài viết KHÔNG có ID cần xóa
     const updatedPosts = posts.filter(p => p.id !== postId);
 
@@ -360,7 +442,7 @@ function handleLike(postId) {
             post.likedBy = [];
         }
         
-        const userIndex = post.likedBy.indexOf(loggedInUser); // Gọi .indexOf() trên mảng đã được đảm bảo
+        const userIndex = post.likedBy.indexOf(loggedInUser); 
 
         if (userIndex === -1) {
             // Trường hợp 1: CHƯA THÍCH -> Thực hiện THÍCH (LIKE)
