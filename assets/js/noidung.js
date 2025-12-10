@@ -158,10 +158,10 @@ function displayPosts(postsToShow) {
         if (post.visibility === 'Công khai') {
             return true;
         }
-        // Nếu là 'Riêng tư', chỉ hiển thị cho chính tác giả
-        if (post.visibility === 'Riêng tư' && post.author === loggedInUser) {
-            return true;
-        }
+        // Nếu là 'Riêng tư', chỉ hiển thị cho chính tác giả và admin
+        if (post.visibility === 'Riêng tư' && (post.author === loggedInUser || isAdmin())) {
+            return true;
+        }
         // Nếu là 'Riêng tư' và không phải tác giả, ẩn
         return false;
     });
