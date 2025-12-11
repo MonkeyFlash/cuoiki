@@ -62,3 +62,13 @@
 .cards ul li{
     margin: 5px 0px;
 }
+@media (max-width: 768px) {
+    .container {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        flex-wrap: wrap;
+    }
+    .cards{
+        min-width: 90%;
+    }
+}

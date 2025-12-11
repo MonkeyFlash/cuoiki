@@ -148,3 +148,20 @@ header .btn:hover{
 /* .form--login{
     display:none;
 } */
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .gt {
+        font-size: 2em;
+    }
+    .btn {
+        margin-left: 14em;
+    }
+    .container {
+        margin-top:5em;
+        /* width: 80%; */
+    }
+}

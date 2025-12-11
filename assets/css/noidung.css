@@ -225,3 +225,13 @@
 
 .save-edit { background-color: #2ecc71; }
 .cancel-edit { background-color: #95a5a6; }
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .top-right {
+    display: flex;
+    flex-direction: column;
+}
+}

@@ -55,3 +55,13 @@
     font-style: italic;
     font-weight: bold;
 }
+@media (max-width: 768px) {
+    .container {
+        margin-top: 2em;
+        margin-bottom: 2em;
+        flex-wrap: wrap;
+    }
+    .cards{
+        min-width: 90%;
+    }
+}
