@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // 1. Tải chế độ theme đã lưu
+    //  Tải chế độ theme đã lưu
     if (currentTheme) {
         applyTheme(currentTheme);
     } else {
