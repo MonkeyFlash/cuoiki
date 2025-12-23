@@ -58,7 +58,7 @@ btnRegisterSubmit.addEventListener("click",function(x){
     // Lay danh sach tai khoan tu localStorage
     let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
     
-    // Kiem tra ton tai (giữ nguyên)
+    // Kiem tra ton tai
     let tontai = false;
     for (let i=0; i<accounts.length; i++){
         if(accounts[i].username === user){
@@ -117,9 +117,9 @@ btnLoginSubmit.addEventListener("click", function(x){
         
         //neu la adim se toi trang admin, user thi toi trang cua user
         if(foundAccount.role === "admin"){
-            window.location.href = "quanly.html";
+            window.location.href = "/quanly.html";
         } else {
-            window.location.href ="noidung.html";
+            window.location.href ="/noidung.html";
         }
     } else {
         alert("Sai tài khoản hoặc mật khẩu!!");
